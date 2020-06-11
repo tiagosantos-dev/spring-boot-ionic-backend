@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+// Essa anotação diz que a classe sera mapeada
 @Entity
 public class Produto implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -22,6 +25,8 @@ public class Produto implements Serializable{
 	private String nome;
 	private Double preco;
 	
+	//essa anotacao diz que sera feita uma tabela muitos pra muitos
+	@JsonBackReference
 	@ManyToMany
 	@JoinTable(
 			name="PRODUTO_CATEGORIA",
