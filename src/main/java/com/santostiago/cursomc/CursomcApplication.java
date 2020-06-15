@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +16,7 @@ import com.santostiago.cursomc.domain.Cidade;
 import com.santostiago.cursomc.domain.Cliente;
 import com.santostiago.cursomc.domain.Endereco;
 import com.santostiago.cursomc.domain.Estado;
+import com.santostiago.cursomc.domain.ItemPedido;
 import com.santostiago.cursomc.domain.Pagamento;
 import com.santostiago.cursomc.domain.PagamentoComBoleto;
 import com.santostiago.cursomc.domain.PagamentoComCartao;
@@ -27,6 +29,7 @@ import com.santostiago.cursomc.repositories.CidadeRepository;
 import com.santostiago.cursomc.repositories.ClienteRepository;
 import com.santostiago.cursomc.repositories.EnderecoRepository;
 import com.santostiago.cursomc.repositories.EstadoRepository;
+import com.santostiago.cursomc.repositories.ItemPedidoRepository;
 import com.santostiago.cursomc.repositories.PagamentoRepository;
 import com.santostiago.cursomc.repositories.PedidoRepository;
 import com.santostiago.cursomc.repositories.ProdutoRepository;
@@ -58,6 +61,9 @@ public class CursomcApplication implements CommandLineRunner{
 	
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -107,6 +113,21 @@ public class CursomcApplication implements CommandLineRunner{
 		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PEDENTE, ped2,dataAtual,dataAtual);
 		ped2.setPagamento(pagto2);
 		
+		//ITEM PEDIDO
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		
 		cli1.getPedido().addAll(Arrays.asList(ped1,ped2));
 		
 		cat1.getProdutos().addAll(Arrays.asList(p1,p2,p3));
@@ -124,6 +145,8 @@ public class CursomcApplication implements CommandLineRunner{
 		
 		
 		
+		
+		
 		categoriaRepository.saveAll(Arrays.asList(cat1,cat2));
 		produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
 		estadoRepository.saveAll(Arrays.asList(est1,est2));
@@ -132,6 +155,7 @@ public class CursomcApplication implements CommandLineRunner{
 		enderecoRepository.saveAll(Arrays.asList(e1,e2));
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1,pagto2));
+		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
 		
 		
 	}
