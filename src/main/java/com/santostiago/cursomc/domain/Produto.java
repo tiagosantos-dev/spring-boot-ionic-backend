@@ -1,6 +1,6 @@
 package com.santostiago.cursomc.domain;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +15,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 // Essa anotação diz que a classe sera mapeada
@@ -36,7 +35,7 @@ public class Produto implements Serializable{
 	
 	
 	//essa anotacao diz que sera feita uma tabela muitos pra muitos
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(
 			name="PRODUTO_CATEGORIA",
