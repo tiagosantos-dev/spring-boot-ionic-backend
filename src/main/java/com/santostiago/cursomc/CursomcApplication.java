@@ -1,11 +1,10 @@
 package com.santostiago.cursomc;
 
 
-import java.text.SimpleDateFormat;
+//import java.text.SimpleDateFormat; 
 import java.util.Arrays;
 import java.util.Date;
 
-import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -104,7 +103,7 @@ public class CursomcApplication implements CommandLineRunner{
 		
 		//PEDIDO
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Date dataAtual = new Date();
 		
 		Pedido ped1 = new Pedido(null, dataAtual, cli1, e1);
