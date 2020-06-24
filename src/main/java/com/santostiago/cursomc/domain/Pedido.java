@@ -63,6 +63,14 @@ public class Pedido implements Serializable{
 	public Integer getId() {
 		return id;
 	}
+	
+	public Double getValorTotal() {
+		double soma = 0.0;
+		for(ItemPedido x : itens) {
+			soma+= x.getSubtotal();
+		}
+		return soma;
+	}
 
 
 	public void setId(Integer id) {
