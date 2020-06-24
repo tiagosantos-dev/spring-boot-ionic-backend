@@ -1,5 +1,6 @@
 package com.santostiago.cursomc.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,9 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.santostiago.cursomc.domain.Categoria;
 import com.santostiago.cursomc.domain.Cliente;
+import com.santostiago.cursomc.dto.CategoriaDTO;
 import com.santostiago.cursomc.dto.ClienteDTO;
+import com.santostiago.cursomc.dto.ClienteNewDTO;
 import com.santostiago.cursomc.services.ClienteService;
 
 @RestController
@@ -32,16 +37,17 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-//	@RequestMapping(method = RequestMethod.POST)
-//	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto){
-//		
-//		Cliente obj = service.fromCliente(objDto);
-//		service.insert(obj);
-//		//Pagando a URI
-//		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-//				.path("/{id}").buildAndExpand(obj.getId()).toUri();
-//		return ResponseEntity.created(uri).build();
-//	}
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto){
+		
+		Cliente obj = service.fromDTO(objDto);
+		service.insert(obj);
+		//Pagando a URI
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
+	}
+
 	//ATUALIZA UMA CATEGORIA E PEGANDO UM ID DA CATEGORIA JA CRIADA
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id ){
