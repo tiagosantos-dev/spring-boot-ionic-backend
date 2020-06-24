@@ -1,6 +1,6 @@
 package com.santostiago.cursomc.resources;
 
-import java.net.URI;
+import java.net.URI; 
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.santostiago.cursomc.domain.Categoria;
 import com.santostiago.cursomc.domain.Cliente;
-import com.santostiago.cursomc.dto.CategoriaDTO;
 import com.santostiago.cursomc.dto.ClienteDTO;
 import com.santostiago.cursomc.dto.ClienteNewDTO;
 import com.santostiago.cursomc.services.ClienteService;

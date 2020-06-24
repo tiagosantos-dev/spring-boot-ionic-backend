@@ -44,6 +44,19 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 	}
 	
+	@ExceptionHandler(IllegalStateException.class)
+	public ResponseEntity<StandardError> illegalStateException(MethodArgumentNotValidException e, HttpServletRequest request){
+		
+		//Classe para receber a mensagem , status, e o timestamp do erro
+	
+		ValidationError err = new ValidationError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+		for(FieldError x : e.getBindingResult().getFieldErrors()) {
+			err.addErros(x.getDefaultMessage(), x.getField());
+		}
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+	}
+	
 	
 
 	  

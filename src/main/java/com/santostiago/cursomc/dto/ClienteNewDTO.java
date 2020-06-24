@@ -1,19 +1,39 @@
 package com.santostiago.cursomc.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import com.santostiago.cursomc.services.validation.ClienteInsert;
+
+@ClienteInsert
 public class ClienteNewDTO {
 	
+	@NotEmpty(message = "Nome Não foi adicionado")
 	private String nome;
+	
+	@NotEmpty
+	@Email(message = "Email invalido")
 	private String email;
+	
 	private String cpfOuCnpj;
+	
 	private Integer tipo;
 	
+	@NotEmpty(message = "lorgadouro Não foi adicionado")
 	private String logradouro;
+	
 	private String numero;
 	private String complemento;
+	
+	@NotEmpty(message = "Bairro Não foi adicionado")
 	private String bairro;
+	
+	@NotEmpty(message = "Cep Não foi adicionado")
 	private String cep;
 	
+	@NotEmpty(message = "Telefone Não foi adicionado")
 	private String telefone1;
+	
 	private String telefone2;
 	private String telefone3;
 	
