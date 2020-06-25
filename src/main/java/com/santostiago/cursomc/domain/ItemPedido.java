@@ -44,6 +44,7 @@ public class ItemPedido implements Serializable {
 		return (preco - desconto) *quantidade;
 	}
 	
+	@JsonIgnore
 	public Produto getProduto() {
 		return id.getProduto();
 		
